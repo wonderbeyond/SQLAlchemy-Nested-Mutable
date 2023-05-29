@@ -1,0 +1,47 @@
+[tool.poetry.group.test.dependencies]
+pytest = "^7.3.1"
+pytest-asyncio = "^0.21.0"
+pytest-docker-service = {path = "../pytest-docker-service", develop = true}
+
+[tool.poetry.group.dev.dependencies]
+yapf = "^0.33.0"
+black = "^23.3.0"
+ruff = "^0.0.267"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+
+[tool.ruff]
+ignore = ["E501"]
+
+[tool.poetry]
+name = "sqlalchemy-nested-mutable"
+version = "0.0.0"
+readme = "README.md"
+description = "SQLAlchemy Nested Mutable Types."
+authors = ["Wonder <wonderbeyond@gmail.com>"]
+license = "MIT"
+repository = "https://github.com/wonderbeyond/sqlalchemy-nested-mutable"
+homepage = "https://github.com/wonderbeyond/sqlalchemy-nested-mutable"
+documentation = "https://github.com/wonderbeyond/sqlalchemy-nested-mutable"
+keywords = ["SQLAlchemy", "Nested", "Mutable", "Types", "JSON"]
+classifiers = [
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+packages = [
+    { include = "sqlalchemy_nested_mutable" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+sqlalchemy = "^2.0"
+psycopg2-binary = "^2.9.6"
+pydantic = "^1.10.8"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
