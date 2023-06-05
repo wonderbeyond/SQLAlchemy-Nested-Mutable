@@ -1,6 +1,11 @@
 name: "PyPI Publish"
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "v.*"
 
 jobs:
   flake8-lint:
@@ -17,6 +22,8 @@ jobs:
   Publish:
     runs-on: ubuntu-latest
     environment: release
+    permissions:
+      id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v4
@@ -28,11 +35,5 @@ jobs:
     - run: |
         poetry self add "poetry-dynamic-versioning[plugin]"
         poetry build
-    - name: Publish PyPI
-      run: |
-        set -ex
-        if curl -Isf https://pypi.org/project/sqlalchemy-nested-mutable/$(poetry version -s)/ > /dev/null; then
-          echo "Package already exists on PyPI"
-        else
-          poetry publish
-        fi
+    - name: Publish package distributions to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
