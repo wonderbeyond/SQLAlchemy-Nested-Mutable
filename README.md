@@ -1,6 +1,10 @@
 SQLAlchemy-Nested-Mutable
 =========================
 
+```shell
+pip install sqlalchemy-nested-mutable
+```
+
 An advanced SQLAlchemy column type factory that helps map complex Python types (e.g. List, Dict, Pydantic Model and their hybrids) to database types (e.g. ARRAY, JSONB),
 And keep track of mutations in deeply nested data structures so that SQLAlchemy can emit proper UPDATE statements.
 
