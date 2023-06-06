@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Optional, Union, Any, Tuple, Dict, List, Iterable, Self, overload
+from typing import TYPE_CHECKING, Optional, Union, Any, Tuple, Dict, List, Iterable, overload
+from typing_extensions import Self
 from weakref import WeakValueDictionary
 
 from sqlalchemy.util.typing import SupportsIndex, TypeGuard

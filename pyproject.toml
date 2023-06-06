@@ -2,11 +2,31 @@
 pytest = "^7.3.1"
 pytest-asyncio = "^0.21.0"
 pytest-docker-service = "^0.2.4"
+tox = "^4.6.0"
 
 [tool.poetry.group.dev.dependencies]
 yapf = "^0.33.0"
 black = "^23.3.0"
 ruff = "^0.0.267"
+
+[tool.tox]
+# See https://python-poetry.org/docs/master/faq/#usecase-3
+legacy_tox_ini = """
+    [tox]
+    isolated_build = true
+
+    env_list =
+        py38
+        py39
+        py310
+        py311
+
+    [testenv]
+    skip_install = true
+    allowlist_externals = poetry
+    commands_pre = poetry install -v --only=main,test
+    commands = poetry run pytest -vx
+"""
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
@@ -16,7 +36,7 @@ ignore = ["E501"]
 
 [tool.poetry]
 name = "sqlalchemy-nested-mutable"
-version = "0.0.1"
+version = "0.1.0"
 readme = "README.md"
 description = "SQLAlchemy Nested Mutable Types."
 authors = ["Wonder <wonderbeyond@gmail.com>"]
@@ -39,8 +59,9 @@ packages = [
 [tool.poetry.dependencies]
 python = "^3.8"
 sqlalchemy = "^2.0"
-psycopg2-binary = "^2.9.6"
-pydantic = "^1.10.8"
+psycopg2-binary = "^2.8"
+pydantic = "^1.10.0"
+typing-extensions = "^4.5.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 
 import pytest
 from sqlalchemy_nested_mutable._compat import pydantic
@@ -27,8 +27,8 @@ class Addresses(MutablePydanticBaseModel):
         area: Optional[str]
 
     preferred: Optional[AddressItem]
-    work: list[AddressItem] = []
-    home: list[AddressItem] = []
+    work: List[AddressItem] = []
+    home: List[AddressItem] = []
     updated_time: Optional[str]
 
 

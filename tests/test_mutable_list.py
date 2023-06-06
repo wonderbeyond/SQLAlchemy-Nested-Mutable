@@ -1,3 +1,5 @@
+from typing import List
+
 import pytest
 import sqlalchemy as sa
 from sqlalchemy.dialects.postgresql import ARRAY, JSONB
@@ -22,7 +24,7 @@ class User(Base):
     name: Mapped[str] = mapped_column(sa.String(30))
     aliases = mapped_column(MutableList[str].as_mutable(ARRAY(sa.String(128))), default=list)
     schedule = mapped_column(
-        MutableList[list[str]].as_mutable(ARRAY(sa.String(128), dimensions=2)), default=list
+        MutableList[List[str]].as_mutable(ARRAY(sa.String(128), dimensions=2)), default=list
     )  # a user's weekly schedule, e.g. [ ['meeting', 'launch'], ['training', 'presentation'] ]
 
 
@@ -33,7 +35,7 @@ class UserV2(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(sa.String(30))
     aliases = mapped_column(MutableList[str].as_mutable(JSONB), default=list)
-    schedule = mapped_column(MutableList[list[str]].as_mutable(JSONB), default=list)
+    schedule = mapped_column(MutableList[List[str]].as_mutable(JSONB), default=list)
 
 
 @pytest.fixture(scope="module", autouse=True)

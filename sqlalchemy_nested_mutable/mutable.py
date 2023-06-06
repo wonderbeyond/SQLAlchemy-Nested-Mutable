@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, List, Iterable, TypeVar, Self
+from typing import TYPE_CHECKING, List, Iterable, TypeVar
+from typing_extensions import Self
 
 import sqlalchemy as sa
 from sqlalchemy.ext.mutable import Mutable
