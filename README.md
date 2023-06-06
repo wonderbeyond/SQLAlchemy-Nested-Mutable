@@ -5,13 +5,29 @@ SQLAlchemy-Nested-Mutable
 pip install sqlalchemy-nested-mutable
 ```
 
-An advanced SQLAlchemy column type factory that helps map complex Python types (e.g. `List`, `Dict`, *Pydantic Model* and their hybrids) to database types (e.g. `ARRAY`, `JSONB`),
+An advanced SQLAlchemy column type factory that helps map compound Python types (e.g. `list`, `dict`, *Pydantic Model* and their hybrids) to database types (e.g. `ARRAY`, `JSONB`),
 And keep track of mutations in deeply nested data structures so that SQLAlchemy can emit proper *UPDATE* statements.
 
 SQLAlchemy-Nested-Mutable is highly inspired by SQLAlchemy-JSON<sup>[[0]](https://github.com/edelooff/sqlalchemy-json)</sup><sup>[[1]](https://variable-scope.com/posts/mutation-tracking-in-nested-json-structures-using-sqlalchemy)</sup>.
-However, it does not limit the mapped Python type to be `Dict`.
+However, it does not limit the mapped Python type to be `dict` or `list`.
 
-Simple Example:
+## Why this package?
+
+* By default, SQLAlchemy does not track in-place mutations for non-scalar data types
+  such as `list` and `dict` (which are usually mapped with `ARRAY` and `JSON/JSONB`).
+
+* Even though SQLAlchemy provides [an extension](https://docs.sqlalchemy.org/en/20/orm/extensions/mutable.html)
+  to track mutations on compound objects, it's too shallow, i.e. it only tracks mutations on the first level of the compound object.
+
+* There exists the [SQLAlchemy-JSON](https://github.com/edelooff/sqlalchemy-json) package
+  to help track mutations on nested `dict` or `list` data structures.
+  However, the db type is limited to `JSON(B)`.
+
+* Also, I would like the mapped Python types can be subclasses of the Pydantic BaseModelModel,
+  which have strong schemas, with the db type be schema-less JSON.
+
+
+## Usage
 
 > NOTE the example below is first updated in `examples/user-addresses.py` and then updated here.
 
