@@ -33,7 +33,6 @@ jobs:
       with:
         poetry-version: "1.2.2"
     - run: |
-        poetry self add "poetry-dynamic-versioning[plugin]"
         poetry build
     - name: Publish package distributions to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
