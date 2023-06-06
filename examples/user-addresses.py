@@ -1,21 +1,3 @@
-SQLAlchemy-Nested-Mutable
-=========================
-
-```shell
-pip install sqlalchemy-nested-mutable
-```
-
-An advanced SQLAlchemy column type factory that helps map complex Python types (e.g. `List`, `Dict`, *Pydantic Model* and their hybrids) to database types (e.g. `ARRAY`, `JSONB`),
-And keep track of mutations in deeply nested data structures so that SQLAlchemy can emit proper *UPDATE* statements.
-
-SQLAlchemy-Nested-Mutable is highly inspired by SQLAlchemy-JSON<sup>[[0]](https://github.com/edelooff/sqlalchemy-json)</sup><sup>[[1]](https://variable-scope.com/posts/mutation-tracking-in-nested-json-structures-using-sqlalchemy)</sup>.
-However, it does not limit the mapped Python type to be `Dict`.
-
-Simple Example:
-
-> NOTE the example below is first updated in `examples/user-addresses.py` and then updated here.
-
-```python
 from typing import Optional, List
 
 import pydantic
@@ -71,10 +53,3 @@ with Session(engine) as s:
     assert isinstance(u.addresses.others[0], Addresses.AddressItem)
 
     print(u.addresses.dict())
-```
-
-For more usage, please refer to the following test files:
-
-* tests/test_mutable_list.py
-* tests/test_mutable_dict.py
-* tests/test_mutable_pydantic_type.py
