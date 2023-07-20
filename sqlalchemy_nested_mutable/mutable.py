@@ -45,14 +45,19 @@ if pydantic is not None:
         """
         Inspired by https://gist.github.com/imankulov/4051b7805ad737ace7d8de3d3f934d6b
         """
+        cache_ok = True
         impl = sa.types.JSON
 
-        def __init__(self, pydantic_type: type[_P]):
+        def __init__(self, pydantic_type: type[_P], sqltype: TypeEngine[_T] = None):
             super().__init__()
             self.pydantic_type = pydantic_type
+            self.sqltype = sqltype
 
         def load_dialect_impl(self, dialect):
             from sqlalchemy.dialects.postgresql import JSONB
+
+            if self.sqltype is not None:
+                return dialect.type_descriptor(self.sqltype)
 
             if dialect.name == "postgresql":
                 return dialect.type_descriptor(JSONB())
@@ -79,8 +84,8 @@ if pydantic is not None:
             return res
 
         @classmethod
-        def as_mutable(cls, /) -> TypeEngine[Self]:
-            return super().as_mutable(PydanticType(cls))
+        def as_mutable(cls, sqltype: TypeEngine[_T] = None) -> TypeEngine[Self]:
+            return super().as_mutable(PydanticType(cls, sqltype))
 elif not TYPE_CHECKING:
     class PydanticType:
         def __new__(cls, *a, **k):
