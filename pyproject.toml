@@ -36,7 +36,7 @@ ignore = ["E501"]
 
 [tool.poetry]
 name = "sqlalchemy-nested-mutable"
-version = "0.1.0"
+version = "0.2.0"
 readme = "README.md"
 description = "SQLAlchemy Nested Mutable Types."
 authors = ["Wonder <wonderbeyond@gmail.com>"]
