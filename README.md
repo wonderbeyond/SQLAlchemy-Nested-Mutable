@@ -21,7 +21,7 @@ However, it does not limit the mapped Python type to be `dict` or `list`.
   to help track mutations on nested `dict` or `list` data structures.
   However, the db type is limited to `JSON(B)`.
 
-* Also, I would like the mapped Python types can be subclasses of the Pydantic BaseModelModel,
+* Also, I would like the mapped Python types can be subclasses of the Pydantic BaseModel,
   which have strong schemas, with the db type be schema-less JSON.
 
 
